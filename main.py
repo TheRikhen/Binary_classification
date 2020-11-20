@@ -16,9 +16,7 @@ train, validation = train_test_split(data_train, test_size=0.2)
 arr_name = []
 arr_train = []
 arr_val = []
-# используем предварительно отобранные признаки
 cols_x = ['volatile acidity', 'alcohol', 'citric acid', 'sulphates']
-# целевой признак
 col_y = 'quality'
 
 

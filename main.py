@@ -14,6 +14,7 @@ from sklearn.metrics import accuracy_score
 data_train = pd.read_csv('winequality-red.csv', delimiter=",")
 print('Number of rows and columns in initial dataset:', data_train.shape)
 train, validation = train_test_split(data_train, test_size=0.2)
+print(data_train)
 arr_name = []
 arr_train = []
 arr_val = []
@@ -65,7 +66,7 @@ def classifier_testing_comparison():
 def predict_model():
     predicted_good_wine = []
     is_good_wine = []
-    srwg, srwb, sfwg, sfwb = None
+    srwg, srwb, sfwg, sfwb = 0, 0, 0, 0
     clf = DecisionTreeClassifier()
     clf.fit(train[cols_x], train[col_y])
     for i in validation[col_y]:
@@ -73,17 +74,19 @@ def predict_model():
     for i in clf.predict(validation[cols_x]):
         predicted_good_wine.append(i)
     for i in range(len(is_good_wine)):
-        for j in is_good_wine, predicted_good_wine:
-            if is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] >= 5:
+        if is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] >= 5:
                 srwg += 1
-            elif is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] <= 5:
+        elif is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] <= 5:
                 srwb += 1
-            elif is_good_wine[i] != predicted_good_wine[i] and predicted_good_wine[i] >= 5:
+        elif is_good_wine[i] != predicted_good_wine[i] and predicted_good_wine[i] >= 5:
                 sfwg += 1
-            elif is_good_wine[i] != predicted_good_wine[i] and predicted_good_wine[i] <= 5:
+        elif is_good_wine[i] != predicted_good_wine[i] and predicted_good_wine[i] <= 5:
                 sfwb += 1
-
-
+    print(srwg, srwb, sfwg, sfwb)
+    df = pd.DataFrame([[srwg, srwb], [sfwg, sfwb]], index=['predict right', 'predict false'],
+        columns=['good wine', 'bad wine'])
+    sns.heatmap(df, annot = True)
+    plt.show()
 
 def main():
     show_correlation_hitmap()

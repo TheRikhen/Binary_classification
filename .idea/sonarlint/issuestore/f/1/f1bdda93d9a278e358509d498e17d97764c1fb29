@@ -1,7 +1,7 @@
 
-Gpython:S1481P"(Remove the unused local variable "srwb".(É¸•8¼·¯»Ş.
-Fpython:S1481T"(Remove the unused local variable "sfwb".(Ê¦x8¡°»Ş.
 Dpython:S1481L"%Remove the unused local variable "j".(Á¡³Ü8Ãø•»Ş.
+Gpython:S1481R"(Remove the unused local variable "sfwg".(ğî®³8¶è¯»Ş.
 Tpython:S3862D"0Replace this expression with an iterable object.( µ¼ûÿÿÿÿ8œŞ¹»Ş.
 Gpython:S1481N"(Remove the unused local variable "srwg".(óèãş8·‹®»Ş.
-Gpython:S1481R"(Remove the unused local variable "sfwg".(ğî®³8¶è¯»Ş.
+Fpython:S1481T"(Remove the unused local variable "sfwb".(Ê¦x8¡°»Ş.
+Gpython:S1481P"(Remove the unused local variable "srwb".(É¸•8¼·¯»Ş.

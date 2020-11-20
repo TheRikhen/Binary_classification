@@ -22,7 +22,7 @@ cols_x = ['volatile acidity', 'alcohol', 'citric acid', 'sulphates']
 col_y = 'quality'
 
 
-def show_correlation_hitmap():
+def show_correlation_heatmap():
     sns.set(style="ticks")
     sns.heatmap(data_train.corr())
     plt.show()
@@ -65,6 +65,7 @@ def predict_model():
     for i in clf.predict(validation[cols_x]):
         predicted_good_wine.append(i)
     for i in range(len(is_good_wine)):
+        print(is_good_wine[i], predicted_good_wine[i])
         if is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] >= 5:
             srwg += 1
         elif is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] <= 5:

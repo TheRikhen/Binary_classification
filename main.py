@@ -10,11 +10,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.metrics import accuracy_score
 
-
 data_train = pd.read_csv('winequality-red.csv', delimiter=",")
 print('Number of rows and columns in initial dataset:', data_train.shape)
 train, validation = train_test_split(data_train, test_size=0.2)
-print(data_train)
 arr_name = []
 arr_train = []
 arr_val = []
@@ -31,25 +29,18 @@ def show_correlation_hitmap():
 
 
 def classifier_testing(classifier, classifier_name):
-    # обучаем классификатор
     classifier.fit(train[cols_x], train[col_y])
-    # проверяем классификатор
     y_train = classifier.predict(train[cols_x])
-    # определяем точность
     y_train_acc = accuracy_score(train[col_y], y_train)
-    # для валидационной выборки
     y_val = classifier.predict(validation[cols_x])
     y_val_acc = accuracy_score(validation[col_y], y_val)
-    # сохранение информации в массивы
     arr_name.append(classifier_name)
     arr_train.append(y_train_acc)
     arr_val.append(y_val_acc)
-    # вывод промежуточных результатов
     print('Accuracy per {} algorithm on train data = {}, on validation data = {}' \
-          .format(classifier_name, \
-                  round(y_train_acc, 3), \
+          .format(classifier_name,
+                  round(y_train_acc, 3),
                   round(y_val_acc, 3)))
-    # возвращаем обученный классификатор
     return classifier
 
 
@@ -75,18 +66,18 @@ def predict_model():
         predicted_good_wine.append(i)
     for i in range(len(is_good_wine)):
         if is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] >= 5:
-                srwg += 1
+            srwg += 1
         elif is_good_wine[i] == predicted_good_wine[i] and predicted_good_wine[i] <= 5:
-                srwb += 1
+            srwb += 1
         elif is_good_wine[i] != predicted_good_wine[i] and predicted_good_wine[i] >= 5:
-                sfwg += 1
+            sfwg += 1
         elif is_good_wine[i] != predicted_good_wine[i] and predicted_good_wine[i] <= 5:
-                sfwb += 1
-    print(srwg, srwb, sfwg, sfwb)
+            sfwb += 1
     df = pd.DataFrame([[srwg, srwb], [sfwg, sfwb]], index=['predict right', 'predict false'],
-        columns=['good wine', 'bad wine'])
-    sns.heatmap(df, annot = True)
+                      columns=['good wine', 'bad wine'])
+    sns.heatmap(df, annot=True)
     plt.show()
+
 
 def main():
     show_correlation_hitmap()
